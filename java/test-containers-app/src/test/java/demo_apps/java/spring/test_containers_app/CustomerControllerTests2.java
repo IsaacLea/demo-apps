@@ -34,6 +34,8 @@ class CustomerControllerTests2 {
 	@LocalServerPort
 	private Integer port;
 
+	// Note, it is possible to configure spring to use the compose.yaml properties here and avoid the need to manually
+	// register these props
 	@DynamicPropertySource
 	static void configureProperties(DynamicPropertyRegistry registry) {
 		registry.add("spring.datasource.url", postgres::getJdbcUrl);
