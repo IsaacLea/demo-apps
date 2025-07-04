@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
-import demo_apps.java.spring.test_containers_app.dao.CustomerDAO;
+import demo_apps.java.spring.test_containers_app.dao.CustomerRepository;
 import demo_apps.java.spring.test_containers_app.entities.Customer;
 
 /*
@@ -26,11 +26,11 @@ import demo_apps.java.spring.test_containers_app.entities.Customer;
 class SampleTests3 {
 
 	@Autowired
-	CustomerDAO customerDAO;
+	CustomerRepository customerRepository;
 
 	@BeforeEach
 	void setUp() {
-		customerDAO.deleteAll();
+		customerRepository.deleteAll();
 	}
 
 	@Test
@@ -42,9 +42,9 @@ class SampleTests3 {
 		List<Customer> customers = List.of(new Customer(null, "John", "john@mail.com"),
 				new Customer(null, "Dennis", "dennis@mail.com"));
 
-		customerDAO.saveAll(customers);
+		customerRepository.saveAll(customers);
 
-		assertEquals(2, customerDAO.findAll().size());
+		assertEquals(2, customerRepository.findAll().size());
 
 	}
 

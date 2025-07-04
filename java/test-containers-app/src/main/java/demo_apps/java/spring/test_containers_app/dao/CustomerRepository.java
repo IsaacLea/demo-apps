@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import demo_apps.java.spring.test_containers_app.entities.Customer;
 
-public interface CustomerDAO extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 }

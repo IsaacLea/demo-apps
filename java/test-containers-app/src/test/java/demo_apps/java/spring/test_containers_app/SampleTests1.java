@@ -16,7 +16,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import demo_apps.java.spring.test_containers_app.dao.CustomerDAO;
+import demo_apps.java.spring.test_containers_app.dao.CustomerRepository;
 import demo_apps.java.spring.test_containers_app.entities.Customer;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -52,19 +52,19 @@ class SampleTests1 {
 	}
 
 	@Autowired
-	CustomerDAO customerDAO;
+	CustomerRepository customerRepository;
 
 	@BeforeEach
 	void setUp() {
 		RestAssured.baseURI = "http://localhost:" + port;
-		customerDAO.deleteAll();
+		customerRepository.deleteAll();
 	}
 
 	@Test
 	void shouldGetAllCustomers() {
 		List<Customer> customers = List.of(new Customer(null, "John", "john@mail.com"),
 				new Customer(null, "Dennis", "dennis@mail.com"));
-		customerDAO.saveAll(customers);
+		customerRepository.saveAll(customers);
 
 		given().contentType(ContentType.JSON).when().get("/api/customers").then().statusCode(200).body(".", hasSize(2));
 	}
