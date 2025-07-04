@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.hasSize;
 
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +15,35 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import demo_apps.java.spring.test_containers_app.dao.CustomerDAO;
 import demo_apps.java.spring.test_containers_app.entities.Customer;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
+/**
+ * E2E tests for the CustomerController using Testcontainers with PostgreSQL. See CustomerControllerTests2.java for
+ * better alternative approach using @Container annotation.
+ */
 // Use random port for the web environment to avoid conflicts.  This is used to make REST call in tests.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
-//Enable Testcontainers lifecycle management so it will start and stop the @Container automatically
-@Testcontainers
-class CustomerControllerTests2 {
-
-	@Container
-	static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+class SampleTests1 {
 
 	@LocalServerPort
 	private Integer port;
 
-	// Note, it is possible to configure spring to use the compose.yaml properties here and avoid the need to manually
-	// register these props
+	static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+
+	@BeforeAll
+	static void beforeAll() {
+		postgres.start();
+	}
+
+	@AfterAll
+	static void afterAll() {
+		postgres.stop();
+	}
+
 	@DynamicPropertySource
 	static void configureProperties(DynamicPropertyRegistry registry) {
 		registry.add("spring.datasource.url", postgres::getJdbcUrl);
