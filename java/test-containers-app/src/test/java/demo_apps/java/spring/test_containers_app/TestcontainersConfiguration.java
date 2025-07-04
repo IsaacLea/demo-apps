@@ -15,4 +15,9 @@ class TestcontainersConfiguration {
 		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 	}
 
+//	@ServiceConnection
+//	MSSQLServerContainer<?> postgresContainer() {
+//		return new MSSQLServerContainer<>(DockerImageName.parse("mcr.microsoft.com/mssql/server:2022-latest"));
+//	}
+
 }
