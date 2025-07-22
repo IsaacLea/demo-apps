@@ -1,0 +1,23 @@
+<p>home works!</p>
+
+<form (ngSubmit)="updateGreeting()" class="greeting-form">
+  <div class="form-group">
+    <label for="messageInput">Update Greeting Message:</label>
+    <input 
+      id="messageInput"
+      type="text" 
+      [(ngModel)]="newMessage" 
+      name="newMessage"
+      placeholder="Enter your message here..."
+      class="message-input"
+      (keyup)="onKeyPress($event)"
+    />
+    <button type="submit" class="update-btn">Update Greeting</button>
+  </div>
+</form>
+
+<app-greeting [message]="greetingMessage()"></app-greeting>
+
+<app-counter></app-counter>
+
+

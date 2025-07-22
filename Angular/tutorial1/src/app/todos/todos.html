@@ -1,0 +1,25 @@
+@if(isLoading()) {
+<p>Loading...</p>
+} @else {
+<p>Number of todos: {{ todoItems().length }}</p>
+}
+
+<form>
+  <label>Filter Todos</label>
+  <input
+    name="searchInput"
+    placeholder="Type to filter..."
+    [(ngModel)]="searchTerm"
+  />
+</form>
+
+@for (todo of todoItems() | filterTodos: searchTerm(); track $index) {
+<app-todo-item
+  (todoToggled)="updateTodoItem($event)"
+  [todo]="todo"
+></app-todo-item>
+}
+<!-- <div>
+  <p>{{ todo.title }} - {{ todo.completed ? "Done" : "Pending" }}</p>
+</div> 
+}-->
