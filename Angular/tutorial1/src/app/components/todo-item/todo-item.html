@@ -1,10 +1,17 @@
-<li appHighlightCompletedTodo [isCompleted]="todo().completed">
-  <input
-    id="todo-{{ todo().id }}"
-    type="checkbox"
-    [checked]="todo().completed"
-    (change)="this.todoClicked()"
-  />
-  <!-- Example of using a pipe in Angular.  This makes the values uppercase -->
-  <label for="todo-{{ todo().id }}">{{ todo().title | uppercase }}</label>
-</li>
+<ul>
+  <li appHighlightCompletedTodo [isCompleted]="todo().completed">
+    <input
+      id="todo-{{ todo().id }}"
+      type="checkbox"
+      [checked]="todo().completed"
+      (change)="this.todoClicked()"
+    />
+    <!-- Example of using a pipe in Angular.  This makes the values uppercase -->
+    <label for="todo-{{ todo().id }}">{{ todo().title | uppercase }}</label>
+
+    <!-- Example of using ngStyle to dynamically apply css -->
+    <!-- <label ngStyle="{'color': todo().completed ? 'darkgreen' : 'darkred'}">{{
+      todo().completed ? "Completed" : "Pending"
+    }}</label> -->
+  </li>
+</ul>

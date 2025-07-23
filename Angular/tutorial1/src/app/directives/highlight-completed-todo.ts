@@ -15,13 +15,8 @@ export class HighlightCompletedTodo {
         this.element.nativeElement.style.backgroundColor = 'lightgreen';
         this.element.nativeElement.style.textDecoration = 'line-through';
       } else {
-        this.element.nativeElement.style.backgroundColor = 'lightcoral';
         this.element.nativeElement.style.textDecoration = 'none';
       }
-      
-      // Additional styles you could add:
-      // this.element.nativeElement.style.color = this.isCompleted() ? 'darkgreen' : 'darkred';
-      // this.element.nativeElement.style.fontWeight = this.isCompleted() ? 'bold' : 'normal';
     });
   }
 
